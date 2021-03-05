@@ -16,10 +16,26 @@ describe('Test location successfully', function() {
                 "skywalker": [400,-400],
                 "sato": [0,-600]
             },
-          }, 'PATCH', { 'Authorization': `Bearer ${"sdkflkasdhf"}` }, {}, {}), { 'awsRequestId': '3000' });
+          }, 'PATCH', {}, {}, {}), { 'awsRequestId': '3000' });
         expect(result.statusCode).to.equal(200);
-        expect(result.body.location[0]).to.equal(500);
-        expect(result.body.location[1]).to.equal(-500);
+        expect(result.body.location[0]).to.equal("500.00");
+        expect(result.body.location[1]).to.equal("-500.00");
+    });
+    it('Error get location', async() => {
+        const result = await handler.LocationHandler(modelEvent.eventQuery({}, 'PATCH', {}, {}, {}), { 'awsRequestId': '3000' });
+        expect(result.statusCode).to.equal(501);
+    });
+    it('Error get location', async() => {
+        const result = await handler.LocationHandler( { 'awsRequestId': '3000' });
+        expect(result.statusCode).to.equal(501);
+    });
+    it('Error get location', async() => {
+        const result = await handler.LocationHandler(modelEvent.eventQuery({
+            "satellites": {
+                "kenobi": [1000,-300]
+            },
+          }, 'PATCH', {}, {}, {}), { 'awsRequestId': '3000' });
+        expect(result.statusCode).to.equal(500);
     });
     after(function() {
     });

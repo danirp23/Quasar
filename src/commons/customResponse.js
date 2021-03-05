@@ -1,17 +1,27 @@
 /**
  * @param {*} response
  */
-const responseToString = (response) => {
-    return JSON.stringify(response)
-};
 
+let getDate = () => {
+    let date = new Date();
+    return date.toJSON();
+};
 const INTERNAL_ERROR = {
     statusCode: 500,
     status: {
-        code: "QUA505",
+        code: "QUA500",
         message: "Internal Error in the service",
-        identifier: null,
-        date: null
+        detail: "",
+        date: getDate
+    }
+};
+
+const INTERNAL_ERROR_DATA = {
+    statusCode: 501,
+    status: {
+        code: "QUA501",
+        message: "Please send valid data",
+        date: getDate
     }
 };
 
@@ -20,8 +30,7 @@ const SUCCESS = {
     status: {
         code: "QUA200",
         message: "SUCCESS",
-        identifier: null,
-        date: null
+        date: getDate
     },
     body: {
         status: "Good"
@@ -29,7 +38,8 @@ const SUCCESS = {
 };
 
 module.exports = {
-    responseToString,
+    getDate,
     INTERNAL_ERROR,
+    INTERNAL_ERROR_DATA,
     SUCCESS
 };

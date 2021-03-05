@@ -1,17 +1,15 @@
-const { LocationDAO } = require('./locationDao');
-
 let satellites = {
     Kenobi: [-500, -200],
     Skywalker: [100, -100],
     Sato: [500, 100]
 }
+
+
 class LocationService {
     constructor() {
-        this.locationDAO = null;
     }
 
     async initialize() {
-        this.locationDAO = new LocationDAO();
     }
 
     /**
@@ -35,7 +33,7 @@ class LocationService {
 
         //comparando respuestas de cordenadas
         let location = this.average(sato[0], sato[1], sky[0], sky[1], kenobi[0], kenobi[1]);
-        console.log(location);
+
         return { location: location, message: "Ubicacion aproximada" };
     }
 
@@ -44,7 +42,7 @@ class LocationService {
         x = x / 3;
         let y = y1 + y2 + y3;
         y = y / 3;
-        return [x.toFixed(3), y.toFixed(3)];
+        return [x.toFixed(2), y.toFixed(2)];
     }
 
     compare(sato,) {
