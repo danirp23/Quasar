@@ -1,7 +1,7 @@
 var chai = require('chai'),
     expect = chai.expect,
-    modelEvent = require('../events/mode-query'),
-    handler = require('../../src/location/locationHandler');
+    modelEvent = require('../../events/mode-query'),
+    handler = require('../../../src/location/locationHandler');
 
 describe('Test location successfully', function() {
     this.timeout(0);
