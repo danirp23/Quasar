@@ -34,7 +34,7 @@ class LocationService {
         //comparando respuestas de cordenadas
         let location = this.average(sato[0], sato[1], sky[0], sky[1], kenobi[0], kenobi[1]);
 
-        return { location: location, message: "Ubicacion aproximada" };
+        return { message: "Ubicacion aproximada", location: location };
     }
 
     average(x1, y1, x2, y2, x3, y3) {

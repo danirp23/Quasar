@@ -12,16 +12,16 @@ const INTERNAL_ERROR = {
         code: "QUA500",
         message: "Internal Error in the service",
         detail: "",
-        date: getDate
+        date: getDate()
     }
 };
 
 const INTERNAL_ERROR_DATA = {
-    statusCode: 501,
+    statusCode: 400,
     status: {
         code: "QUA501",
         message: "Please send valid data",
-        date: getDate
+        date: getDate()
     }
 };
 
@@ -30,7 +30,7 @@ const SUCCESS = {
     status: {
         code: "QUA200",
         message: "SUCCESS",
-        date: getDate
+        date: getDate()
     },
     body: {
         status: "Good"

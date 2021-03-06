@@ -16,20 +16,20 @@ describe('Test location successfully', function() {
                 "skywalker": [400,-400],
                 "sato": [0,-600]
             },
-          }, 'PATCH', {}, {}, {}), { 'awsRequestId': '3000' });
+          }, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
         expect(result.statusCode).to.equal(200);
         expect(result.body.location[0]).to.equal("500.00");
         expect(result.body.location[1]).to.equal("-500.00");
     });
-    it('Error get location', async() => {
-        const result = await handler.LocationHandler(modelEvent.eventQuery({}, 'PATCH', {}, {}, {}), { 'awsRequestId': '3000' });
-        expect(result.statusCode).to.equal(501);
+    it('Error get location body empty', async() => {
+        const result = await handler.LocationHandler(modelEvent.eventQuery({}, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
+        expect(result.statusCode).to.equal(400);
     });
-    it('Error get location', async() => {
+    it('Error get location empty', async() => {
         const result = await handler.LocationHandler( { 'awsRequestId': '3000' });
-        expect(result.statusCode).to.equal(501);
+        expect(result.statusCode).to.equal(400);
     });
-    it('Error get location', async() => {
+    it('Error get location data error', async() => {
         const result = await handler.LocationHandler(modelEvent.eventQuery({
             "satellites": {
                 "kenobi": [1000,-300]

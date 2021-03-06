@@ -4,7 +4,8 @@ let {
     SUCCESS,
     INTERNAL_ERROR,
     INTERNAL_ERROR_DATA,
-    responseToString } = require('../commons/customResponse');
+    getDate } = require('../commons/customResponse');
+const { debug } = require('console');
 
 class LocationController {
 
@@ -34,13 +35,16 @@ class LocationController {
             status = SUCCESS;
             status.body = location;
             response = status;
+            console.debug("Success", response);
         } catch (error) {
             if (error.status && error.status.code) {
+                console.error("Error:", error);
                 return error;
             }
             INTERNAL_ERROR.status.detail = error.message;
             status = INTERNAL_ERROR;
             response = status;
+            console.error("Error:", response);
         }
         return response;
     }
