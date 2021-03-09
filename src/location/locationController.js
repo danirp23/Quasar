@@ -3,9 +3,8 @@ const { LocationService } = require('./locationService');
 let {
     SUCCESS,
     INTERNAL_ERROR,
-    INTERNAL_ERROR_DATA,
-    getDate } = require('../commons/customResponse');
-const { debug } = require('console');
+    INTERNAL_ERROR_DATA 
+} = require('../commons/customResponse');
 
 class LocationController {
 
