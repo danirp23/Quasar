@@ -21,7 +21,6 @@ class LocationService {
         let sato = [];
         let sky = [];
         let kenobi = [];
-        satellites.Sato.find
         //Calculo de las cordenadas de la nave
         sato[0] = satellites.Sato[0] + event.body.satellites.sato[0];
         sato[1] = satellites.Sato[1] + event.body.satellites.sato[1];

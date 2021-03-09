@@ -36,14 +36,13 @@ class MessageService {
         let result = [];
         for (let i in mayor) {
             if (mayor[i] !== "")
-                if ((result[result.length - 1] !== mayor[i]))
+                if (result[result.length - 1] !== mayor[i] && result[result.length - 2] !== mayor[i])
                     result.push(mayor[i]);
-            if (array2[i] && array2[i] !== "") {
-                if (result[result.length - 1] !== array2[i])
+            if (array2[i] && array2[i] !== "")
+                if (result[result.length - 1] !== array2[i] && result[result.length - 2] !== array2[i])
                     result.push(array2[i]);
-            }
             if (array3[i] && array3[i] !== "")
-                if (result[result.length - 1] !== array3[i])
+                if (result[result.length - 1] !== array3[i] && result[result.length - 2] !== array3[i])
                     result.push(array3[i]);
         }
         return result.toString();

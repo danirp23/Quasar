@@ -25,7 +25,7 @@ provider:
 functions:
   location:
     handler:  src/location/locationhandler.LocationHandler
-    description: Microservice for location ship
+    description: Microservice for location to spacecrafts
     events:
       - http:
           path: /v1/location
@@ -33,10 +33,20 @@ functions:
           cors: true
           integration: lambda
           response: ${self:custom.customHeaders}
+  message:
+    handler:  src/message/messagehandler.MessageHandler
+    description: Microservice for get mesagge to spacecrafts
+    events:
+      - http:
+          path: /v1/message
+          method: post
+          cors: true
+          integration: lambda
+          response: ${self:custom.customHeaders}
 
 
 resources:
-  Description: CAMBIAR
+  Description: Microservices to decrypt and send the location of spacecrafts asking for help
 
 custom:
     customHeaders:

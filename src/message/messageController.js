@@ -28,6 +28,8 @@ class MessageController {
         let response = {};
         let status = {};
         try {
+            if (!(event.body) || !(event.body.satellites))
+                throw INTERNAL_ERROR_DATA;
             let message = await this.messageService.getMessage(event, context);
             status = SUCCESS;
             status.body = message;
