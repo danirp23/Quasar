@@ -94,6 +94,12 @@ Los tipos de respuesta de este microservicio son:
     }
 }
 ````
+### 1.2.4 Pantallas 
+_____
+Req
+![image](https://user-images.githubusercontent.com/44010632/110700965-90eaac00-81be-11eb-9544-9708fa407b99.png)
+Res
+![image](https://user-images.githubusercontent.com/44010632/110700995-9a741400-81be-11eb-90d1-51f2a12923c2.png)
 
 ## 1.2 Consulta del mensaje secreto de la nave
 Se rearma el mensaje que envio la nave
@@ -173,11 +179,17 @@ Los tipos de respuesta de este microservicio son:
     }
 }
 ````
+### 1.2.4 Pantallas 
+_____
+Req
+![image](https://user-images.githubusercontent.com/44010632/110700609-276a9d80-81be-11eb-99ce-f71511643853.png)
+Res
+![image](https://user-images.githubusercontent.com/44010632/110700660-318c9c00-81be-11eb-96f0-992fb8324d36.png)
 
-## 1.2 Consulta del mensaje y localizacion secreta de la nave
+## 1.3 Consulta del mensaje y localizacion secreta de la nave
 Se rearma el mensaje que envio la nave y se localiza las cordenadas de la nave
 
-### 1.2.1 Request
+### 1.3.1 Request
 _____
 ``POST``
 Para el uso de este servicio será necesario enviar los mensajes que reciben los satelites y las distancias de cada satelite a la nave
@@ -203,7 +215,7 @@ Para el uso de este servicio será necesario enviar los mensajes que reciben los
     ]
 }
 ````
-### 1.2.2 Response
+### 1.3.2 Response
 _____
 La respuesta existosa será de la siguiente forma:
 ````json
@@ -218,7 +230,7 @@ La respuesta existosa será de la siguiente forma:
     }
 }
 ````
-### 1.2.3 Codigos de respuesta
+### 1.3.3 Codigos de respuesta
 _____
 Los tipos de respuesta de este microservicio son:
 
@@ -243,6 +255,13 @@ Los tipos de respuesta de este microservicio son:
     "RESPONSE_CODE": 404
 }
 ````
+### 1.3.4 Pantallas 
+_____
+Req
+![image](https://user-images.githubusercontent.com/44010632/110700023-76fc9980-81bd-11eb-812e-ee6b7f467bff.png)
+Res
+![image](https://user-images.githubusercontent.com/44010632/110700059-824fc500-81bd-11eb-889c-8ef28f5841a9.png)
+
 # 2. Pre requisitos
 _____
 Instalar las siguientes herramientas:
