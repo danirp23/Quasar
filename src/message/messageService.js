@@ -14,9 +14,9 @@ class MessageService {
      * @param {*} context
      */
     async getMessage(event, context) {
-        let sato = event.body.satellites.sato;
-        let sky = event.body.satellites.skywalker;
-        let kenobi = event.body.satellites.kenobi;
+        let sato = event.body.satellites[2].message;
+        let sky = event.body.satellites[1].message;
+        let kenobi = event.body.satellites[0].message;
 
         this.lengthMenssage([kenobi.length, kenobi], [sato.length, sato], [sky.length, sky]);
         return endMessage.replace(/,/g, ' ');
@@ -25,7 +25,6 @@ class MessageService {
     lengthMenssage(x, y, z) {
         if (x[0] >= y[0] && x[0] >= z[0]) {
             endMessage = this.compar(x[1], y[1], z[1]);
-            console.debug(endMessage);
             return endMessage;
         } else
             this.lengthMenssage(y, z, x);

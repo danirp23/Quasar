@@ -14,23 +14,23 @@ describe('Test Topsecret', function() {
             "satellites": [
                 {
                     "name": "kenobi",
-                    "distance": 1063.01,
+                    "distance": 100,
                     "message": ["este", "", "", "mensaje", ""]
                 },
                 {
                     "name": "skywalker",
-                    "distance": 632.46,
+                    "distance": 350,
                     "message": ["", "es", "", "", "secreto"]
                 },
                 {
                     "name": "sato",
-                    "distance": 447.21,
+                    "distance": 950,
                     "message": ["este", "", "un", "", ""]
                 }
             ]
           }, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
-        //expect(result.statusCode).to.equal(200);
-        //expect(result.body).to.equal("este es un mensaje de aiuda");
+        expect(result.RESPONSE_CODE).to.equal(200);
+        expect(result.body.message).to.equal("este es un mensaje secreto");
     });
     after(function() {
     });

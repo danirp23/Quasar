@@ -3,7 +3,7 @@ var chai = require('chai'),
     modelEvent = require('../../events/mode-query'),
     handler = require('../../../src/location/locationHandler');
 
-describe('Test location', function() {
+describe.only('Test location', function() {
     this.timeout(0);
     beforeEach(function() {   
         
@@ -11,15 +11,24 @@ describe('Test location', function() {
 
     it('Success get location', async() => {
         const result = await handler.LocationHandler(modelEvent.eventQuery({
-            "satellites": {
-                "kenobi": [1000,-300],
-                "skywalker": [400,-400],
-                "sato": [0,-600]
-            },
+            "satellites": [
+                {
+                    "name":"kenobi", 
+                    "distance":1220.66
+                },
+                {
+                    "name":"skywalker",
+                    "distance":721.11
+                },
+                {   
+                    "name":"sato",
+                    "distance":400.00
+                }
+            ],
           }, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
         expect(result.statusCode).to.equal(200);
-        expect(result.body.location[0]).to.equal("500.00");
-        expect(result.body.location[1]).to.equal("-500.00");
+        expect(result.body.x).to.equal("500.01");
+        expect(result.body.y).to.equal("499.97");
     });
     it('Error get location body empty', async() => {
         const result = await handler.LocationHandler(modelEvent.eventQuery({}, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
@@ -31,9 +40,12 @@ describe('Test location', function() {
     });
     it('Error get location data error', async() => {
         const result = await handler.LocationHandler(modelEvent.eventQuery({
-            "satellites": {
-                "kenobi": [1000,-300]
-            },
+            "satellites": [
+                {
+                    "name":"kenobi",
+                    "distance":1220.66
+                }
+            ],
           }, 'PATCH', {}, {}, {}), { 'awsRequestId': '3000' });
         expect(result.statusCode).to.equal(500);
     });

@@ -43,11 +43,11 @@ class TopsecretController {
         } catch (error) {
             if (error.status && error.status.code) {
                 console.error("Error:", error);
-                return error;
+                return { RESPONSE_CODE: 404 };
             }
             INTERNAL_ERROR.status.detail = error.topsecret;
             status = INTERNAL_ERROR;
-            response = status;
+            response = { RESPONSE_CODE: 404 };
             console.error("Error:", response);
         }
         return response;
