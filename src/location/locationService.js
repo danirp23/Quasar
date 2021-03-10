@@ -1,9 +1,9 @@
-let satellites = {
-    Kenobi: [-500, -200],
-    Skywalker: [100, -100],
-    Sato: [500, 100]
-}
-
+let x1 = -500;
+let y1 = -200;
+let x2 = 100;
+let y2 = -100;
+let x3 = 500;
+let y3 = 100;
 
 class LocationService {
     constructor() {
@@ -18,32 +18,51 @@ class LocationService {
      * @param {*} context
      */
     async getLocation(event, context) {
-        let sato = [];
-        let sky = [];
-        let kenobi = [];
+        let distance1 = event.body.satellites[0].distance;
+        let distance2 = event.body.satellites[1].distance;
+        let distance3 = event.body.satellites[2].distance;
+
+        console.log(`Sat distance calculate 1:${distance1.toFixed(2)} 2:${distance2.toFixed(2)} 3:${distance3.toFixed(2)}`);
+
+        let x12 = x1*x1;
+        let y12 = y1*y1;
+        let x22 = x2*x2;
+        let y22 = y2*y2;
+        let x32 = x3*x3;
+        let y32 = y3*y3;
+        let d12 = distance1*distance1;
+        let d22 = distance2*distance2;
+        let d32 = distance3*distance3;
+
         //Calculo de las cordenadas de la nave
-        sato[0] = satellites.Sato[0] + event.body.satellites.sato[0];
-        sato[1] = satellites.Sato[1] + event.body.satellites.sato[1];
+        let a = ((d12-d22+x22+y22-x12-y12)/(2*(y2-y1)));
+        let b = (x2-x1)/(y2-y1);
+        let c = ((d22-d32+x32+y32-x22-y22)/2);
 
-        sky[0] = satellites.Skywalker[0] + event.body.satellites.skywalker[0];
-        sky[1] = satellites.Skywalker[1] + event.body.satellites.skywalker[1];
+        let x = (c-(a*(y3-y2)))/((x3-x2)-(b*(y3-y2)));
+        let y = a-(x*b);
 
-        kenobi[0] = satellites.Kenobi[0] + event.body.satellites.kenobi[0];
-        kenobi[1] = satellites.Kenobi[1] + event.body.satellites.kenobi[1];
+        console.log(`Ship coords calculate [${x.toFixed(2)},${y.toFixed(2)}]`);
 
         //comparando respuestas de cordenadas
-        let location = this.average(sato[0], sato[1], sky[0], sky[1], kenobi[0], kenobi[1]);
+        let location = {x: x.toFixed(2), y:y.toFixed(2)};
 
-        return { message: "Ubicacion aproximada", location: location };
+        return location;
     }
 
-    average(x1, y1, x2, y2, x3, y3) {
-        let x = x1 + x2 + x3;
-        x = x / 3;
-        let y = y1 + y2 + y3;
-        y = y / 3;
-        return [x.toFixed(2), y.toFixed(2)];
-    }
+/*  average(X, Y, distance1, distance2, distance3) {
+        let d1 = Math.sqrt(((X-x3)*(X-x3)) + ((Y-y3)*(Y-y3)));
+        let d2 = Math.sqrt(((X-x2)*(X-x2)) + ((Y-y2)*(Y-y2)));
+        let d3 = Math.sqrt(((X-x1)*(X-x1)) + ((Y-y1)*(Y-y1)));
+
+        console.log(`Sat distance 1:${d1.toFixed(2)} 2:${d2.toFixed(2)} 3:${d3.toFixed(2)}`);
+
+        if(Math.ceil(d1) === Math.ceil(distance1) && Math.ceil(d2) === Math.ceil(distance2) && Math.ceil(d3) === Math.ceil(distance3)){
+            return {x: X.toFixed(2), y:Y.toFixed(2)};
+        }
+        return 404;
+        
+    } */
 
 }
 

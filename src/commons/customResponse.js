@@ -36,10 +36,18 @@ const SUCCESS = {
         status: "Good"
     }
 };
+const SUCCESS_TOPSECRET = {
+    RESPONSE_CODE: 200,
+    body: {
+        position: null,
+        message: null
+    }
+};
 
 module.exports = {
     getDate,
     INTERNAL_ERROR,
     INTERNAL_ERROR_DATA,
-    SUCCESS
+    SUCCESS,
+    SUCCESS_TOPSECRET
 };
