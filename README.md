@@ -11,7 +11,7 @@ Permite consultar solo la ubicacion de la nave
 
 ### 1.1.1 Request 
 _____
-``POST``
+``POST https://vruvalfg3h.execute-api.us-east-1.amazonaws.com/dev/v1/location``
 Para el uso de este servicio será necesario enviar la distancia de cada satelite con respecto a la nave
 
 ````json
@@ -100,7 +100,7 @@ Se rearma el mensaje que envio la nave
 
 ### 1.2.1 Request
 _____
-``POST``
+``POST https://vruvalfg3h.execute-api.us-east-1.amazonaws.com/dev/v1/message``
 Para el uso de este servicio será necesario enviar los mensajes que reciben los satelites
 
 ````json
@@ -179,7 +179,7 @@ Se rearma el mensaje que envio la nave y se localiza las cordenadas de la nave
 
 ### 1.2.1 Request
 _____
-``POST``
+``POST https://vruvalfg3h.execute-api.us-east-1.amazonaws.com/dev/topsecret``
 Para el uso de este servicio será necesario enviar los mensajes que reciben los satelites y las distancias de cada satelite a la nave
 
 ````json
