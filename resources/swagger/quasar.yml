@@ -1,0 +1,168 @@
+swagger: "2.0"
+info:
+  description: "Administración de los mensajes y ubicacion de las naves que esten mas alla de los asteroides."
+  version: "1.0.0"
+  title: "Quasar"
+  contact:
+    email: "danielarp1994@gmail.com"
+host: "vruvalfg3h.execute-api.us-east-1.amazonaws.com"
+basePath: "/dev"
+tags:
+- name: "Quasar"
+  description: "Everything about ships"
+schemes:
+- "https"
+paths:
+  /v1/location:
+    post:
+      tags:
+      - "Quasar"
+      summary: "Permite consultar solo la ubicacion de la nave"
+      description: ""
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Para el uso de este servicio será necesario enviar la distancia de cada satelite con respecto a la nave"
+        required: true
+        schema:
+          $ref: "#/definitions/bodyLocation"
+      responses:
+        "400":
+          description: "Invalid input"
+        "200":
+          description: "Succes"
+  /v1/message:
+    post:
+      tags:
+      - "Quasar"
+      summary: "Se rearma el mensaje que envio la nave"
+      description: ""
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Para el uso de este servicio será necesario enviar la distancia de cada satelite con respecto a la nave"
+        required: true
+        schema:
+          $ref: "#/definitions/bodyMessage"
+      responses:
+        "400":
+          description: "Invalid input"
+        "200":
+          description: "Succes"
+  /topsecret:
+    post:
+      tags:
+      - "Quasar"
+      summary: "Permite consultar mensaje y la ubicacion de la nave"
+      description: ""
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Para el uso de este servicio será necesario enviar la distancia de cada satelite con respecto a la nave y los mensajes de cada satelite"
+        required: true
+        schema:
+          $ref: "#/definitions/bodyTopsecret"
+      responses:
+        "400":
+          description: "Invalid input"
+        "200":
+          description: "Succes"
+
+definitions:
+  SatellitesLocation:
+    type: "object"
+    properties:
+      distance:
+        type: "number"
+      name:
+        type: "string"
+    xml:
+      name: "Tag"
+  SatellitesTopsecret:
+    type: "object"
+    properties:
+      message:
+        type: "array"
+        items:
+          $ref: "#/definitions/Message"
+      distance:
+        type: "number"
+        example: 100
+      name:
+        type: "string"
+        example: "sato"
+    xml:
+      name: "Tag"
+  SatellitesMessage:
+    type: "object"
+    properties:
+      message:
+        type: "array"
+        items:
+          $ref: "#/definitions/Message"
+      name:
+        type: "string"
+        example: "sato"
+    xml:
+      name: "Tag"
+  Message:
+    type: "string"
+    example: "Mensajiño"
+  bodyLocation:
+    type: "object"
+    required:
+    - "name"
+    - "photoUrls"
+    properties:
+      satellites:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          $ref: "#/definitions/SatellitesLocation"
+  bodyMessage:
+    type: "object"
+    required:
+    - "name"
+    - "photoUrls"
+    properties:
+      satellites:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          $ref: "#/definitions/SatellitesMessage"
+  bodyTopsecret:
+    type: "object"
+    required:
+    - "name"
+    - "photoUrls"
+    properties:
+      satellites:
+        type: "array"
+        xml:
+          name: "tag"
+          wrapped: true
+        items:
+          $ref: "#/definitions/SatellitesTopsecret"
+  

@@ -1,0 +1,44 @@
+{
+  "name": "serv-quasar-mic",
+  "version": "1.0.0",
+  "description": "service for return menssage and location of the ship",
+  "main": "index.js",
+  "scripts": {
+    "test": "env-cmd -f ./test/.env nyc --all --reporter=lcov --reporter=text-summary mocha -t 15000 --recursive \"./test/**/*.spec.js\" --reporter=nyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danirp23/Quasar.git"
+  },
+  "author": "Daniela Pedraza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danirp23/Quasar/issues"
+  },
+  "dependencies": {
+    "1.0.3": "^1.0.3",
+    "aws-sdk": "latest",
+    "aws-xray-sdk": "^2.5.0",
+    "dateformat": "^3.0.3",
+    "moment": "^2.27.0",
+    "serverless-aws-documentation": "^1.1.0",
+    "serverless-plugin-log-retention": "^2.0.0",
+    "serverless-plugin-optimize": "^4.1.4-rc.1",
+    "serverless-prune-plugin": "^1.4.4",
+    "serverless-reqvalidator-plugin": "^1.0.4",
+    "trilateration": "0.0.1",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "aws-sdk-mock": "^5.1.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "dirty-chai": "^2.0.1",
+    "env-cmd": "^10.0.1",
+    "mocha": "^5.2.0",
+    "nyc": "^14.1.1",
+    "sinon": "^7.5.0",
+    "sinon-chai": "^3.3.0"
+  },
+  "homepage": "https://github.com/danirp23/Quasar#readme"
+}

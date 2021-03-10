@@ -1,0 +1,97 @@
+service: quasar-ms
+
+plugins:
+  - serverless-reqvalidator-plugin
+  - serverless-aws-documentation
+  - serverless-prune-plugin
+  - serverless-plugin-optimize
+  - serverless-plugin-log-retention
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  profile: loquesea
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  timeout: 10
+  memorySize: 512
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
+
+
+functions:
+  location:
+    handler:  src/location/locationhandler.LocationHandler
+    description: Microservice for location to spacecrafts
+    events:
+      - http:
+          path: /v1/location
+          method: post
+          cors: true
+          integration: lambda
+          response: ${self:custom.customHeaders}
+  message:
+    handler:  src/message/messagehandler.MessageHandler
+    description: Microservice for get mesagge to spacecrafts
+    events:
+      - http:
+          path: /v1/message
+          method: post
+          cors: true
+          integration: lambda
+          response: ${self:custom.customHeaders}
+  topSecret:
+    handler:  src/topsecret/topsecrethandler.TopsecretHandler
+    description: Microservice for get mesagge and location to spacecrafts
+    events:
+      - http:
+          path: /topsecret/
+          method: post
+          cors: true
+          integration: lambda
+          response: ${self:custom.customHeaders}
+
+
+resources:
+  Description: Microservices to decrypt and send the location of spacecrafts asking for help
+
+custom:
+    customHeaders:
+      headers:
+        Content-Type: "'application/json'"
+        Content-Security-Policy: "'Include default-src 'self''"
+        X-Frame-Options: "'DENY'"
+        X-Content-Type-Options: "'nosniff'"
+        X-Permitted-Cross-Domain-Policies: "'none'"
+        Strict-Transport-Security: "'max-age=31536000; includeSubDomains; preload'"
+        X-XSS-Protection: "'1'"
+        Cache-Control: "'max-age=0; Expires=-1 or Expires: Fri, 01 Jan 1990 00:00:00 GMT; no-cache, must-revalidate'"
+      statusCodes:
+          200:
+              pattern: ''
+          400:
+              pattern: '.*"statusCode":400.*'
+              template: "$input.path('$.errorMessage')"
+          401:
+              pattern: '.*"statusCode":401.*'
+              template: "$input.path('$.errorMessage')"
+          404:
+              pattern: '.*"statusCode":404.*'
+              template: "$input.path('$.errorMessage')"
+          422:
+              pattern: '.*"statusCode":422.*'
+              template: "$input.path('$.errorMessage')"
+          500:
+              pattern: '.*"statusCode":500.*'
+              template: "$input.path('$.errorMessage')"
+    logRetentionInDays: 14
+    optimize:
+      global: true
+
+
+    prune:
+      automatic: true
+      number: 1
