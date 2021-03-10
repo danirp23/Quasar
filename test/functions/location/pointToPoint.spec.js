@@ -24,7 +24,7 @@ describe('Test location', function() {
                     "name":"sato",
                     "distance":400.00
                 }
-            ],
+            ]
           }, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
         expect(result.statusCode).to.equal(200);
         expect(result.body.x).to.equal("500.01");

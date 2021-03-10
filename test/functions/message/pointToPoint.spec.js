@@ -21,7 +21,7 @@ describe('Test Message', function() {
                 "name":"skywalker",
                 "message":["este", "", "un", "",""]
             }
-            ],
+            ]
           }, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
         expect(result.statusCode).to.equal(200);
         expect(result.body).to.equal("este es un mensaje secreto");
