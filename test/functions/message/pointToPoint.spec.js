@@ -11,14 +11,20 @@ describe('Test Message', function() {
 
     it('Success get Message', async() => {
         const result = await handler.MessageHandler(modelEvent.eventQuery({
-            "satellites": {
-                "kenobi":["", "este", "es", "un", "mensaje"],
-                "sato":  ["este", "", "un", "mensaje"],
-                "skywalker":["", "", "", "","","","","de","","aiuda"]
-            },
+            "satellites": [{
+                "name":"kenobi",
+                "message":["este", "", "", "mensaje", ""],
+            },{
+                "name":"sato",
+                "message":["","es", "", "", "secreto"]
+            },{
+                "name":"skywalker",
+                "message":["este", "", "un", "",""]
+            }
+            ],
           }, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
         expect(result.statusCode).to.equal(200);
-        expect(result.body).to.equal("este es un mensaje de aiuda");
+        expect(result.body).to.equal("este es un mensaje secreto");
     });
     it('Error get message body empty', async() => {
         const result = await handler.MessageHandler(modelEvent.eventQuery({}, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });

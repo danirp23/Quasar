@@ -9,7 +9,7 @@ describe('Test Topsecret', function() {
         
     });
 
-    it.only('Success get Topsecret', async() => {
+    it('Success get Topsecret', async() => {
         const result = await handler.TopsecretHandler(modelEvent.eventQuery({
             "satellites": [
                 {
@@ -31,6 +31,26 @@ describe('Test Topsecret', function() {
           }, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
         expect(result.RESPONSE_CODE).to.equal(200);
         expect(result.body.message).to.equal("este es un mensaje secreto");
+    });
+    it('Error body empty', async() => {
+        const result = await handler.TopsecretHandler(modelEvent.eventQuery({}, 'POST', {}, {}, {}), { 'awsRequestId': '3000' });
+        expect(result.RESPONSE_CODE).to.equal(404);
+    });
+    it('Error empty', async() => {
+        const result = await handler.TopsecretHandler( { 'awsRequestId': '3000' });
+        expect(result.RESPONSE_CODE).to.equal(404);
+    });
+    it('Error data error', async() => {
+        const result = await handler.TopsecretHandler(modelEvent.eventQuery({
+            "satellites": [
+                {
+                    "name":"kenobi",
+                    "distance":1220.66,
+                    "message": ["este", "", "un", "", ""]
+                }
+            ],
+          }, 'PATCH', {}, {}, {}), { 'awsRequestId': '3000' });
+        expect(result.RESPONSE_CODE).to.equal(404);
     });
     after(function() {
     });

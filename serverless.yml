@@ -43,6 +43,16 @@ functions:
           cors: true
           integration: lambda
           response: ${self:custom.customHeaders}
+  topSecret:
+    handler:  src/topsecret/topsecrethandler.TopsecretHandler
+    description: Microservice for get mesagge and location to spacecrafts
+    events:
+      - http:
+          path: /topsecret/
+          method: post
+          cors: true
+          integration: lambda
+          response: ${self:custom.customHeaders}
 
 
 resources:

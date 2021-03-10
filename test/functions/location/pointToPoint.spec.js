@@ -3,7 +3,7 @@ var chai = require('chai'),
     modelEvent = require('../../events/mode-query'),
     handler = require('../../../src/location/locationHandler');
 
-describe.only('Test location', function() {
+describe('Test location', function() {
     this.timeout(0);
     beforeEach(function() {   
         
